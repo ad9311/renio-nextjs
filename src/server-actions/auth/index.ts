@@ -1,6 +1,7 @@
 'use server';
 
-import { retrieveJwtToken } from '@/helpers/auth/server';
+import { getJwtToken, retrieveJwtToken } from '@/helpers/auth/server';
+import { defaultHeaders } from '@/helpers/fetch';
 import { SignInFormState } from '@/types/auth';
 
 export async function signInAction(
@@ -16,10 +17,7 @@ export async function signInAction(
 
   const response = await fetch(`${process.env.API}/users/sign_in`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
+    headers: defaultHeaders,
     body,
   });
 
@@ -33,6 +31,24 @@ export async function signInAction(
       user: json.data.user,
       errors: json.errors,
     };
+  }
+
+  return initState;
+}
+
+export async function signOutAction(initState: boolean): Promise<boolean> {
+  const jwtToken = await getJwtToken();
+  const headers = jwtToken
+    ? { ...defaultHeaders, Authorization: `Bearer ${jwtToken}` }
+    : defaultHeaders;
+
+  const response = await fetch(`${process.env.API}/users/sign_out`, {
+    method: 'DELETE',
+    headers,
+  });
+
+  if (response.ok) {
+    return true;
   }
 
   return initState;
