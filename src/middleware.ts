@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
+
 import { AUTH_ROUTES } from './routes';
 
 export function middleware(request: NextRequest) {
