@@ -1,4 +1,7 @@
+import { User } from '../user';
+
 export type SignInFormState = {
-  user: string | null;
+  jwtToken: string | null;
+  user: User | null;
   errors: null;
 };

@@ -1,13 +1,17 @@
 'use client';
 
+import { redirect } from 'next/navigation';
 import { useEffect } from 'react';
 import { useFormState } from 'react-dom';
 
 import SubmitFormButton from '@/components/client/SubmitFormButton';
+import { saveJwtTokenAsCookie } from '@/helpers/auth/client';
+import { MAIN_ROUTES } from '@/routes';
 import { signInAction } from '@/server-actions/auth';
 import { SignInFormState } from '@/types/auth';
 
 const initState: SignInFormState = {
+  jwtToken: null,
   user: null,
   errors: null,
 };
@@ -15,8 +19,15 @@ const initState: SignInFormState = {
 export default function SignInForm() {
   const [formState, formAction] = useFormState(signInAction, initState);
 
+  function handleSignIn() {
+    if (formState.user && formState.jwtToken) {
+      saveJwtTokenAsCookie(formState.jwtToken);
+      redirect(MAIN_ROUTES.HOME);
+    }
+  }
+
   useEffect(() => {
-    console.log(formState);
+    handleSignIn();
   }, [formState]);
 
   return (

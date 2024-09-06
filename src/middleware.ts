@@ -6,13 +6,15 @@ export function middleware(request: NextRequest) {
   const pathname = new URL(request.url).pathname;
   const cookie = request.cookies.get('renio-auth');
 
-  if (!cookie) {
-    if (pathname.startsWith('/auth')) {
-      return NextResponse.next();
-    }
+  if (pathname.startsWith('/auth') && cookie) {
+    return NextResponse.redirect(`${process.env.HOST}/`);
+  }
 
+  if (!pathname.startsWith('/auth') && !cookie) {
     return NextResponse.redirect(`${process.env.HOST}${AUTH_ROUTES.SIGN_IN}`);
   }
+
+  return NextResponse.next();
 }
 
 export const config = {
