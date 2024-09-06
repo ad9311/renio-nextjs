@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
+import { AUTH_ROUTES } from './routes';
 
 export function middleware(request: NextRequest) {
   const pathname = new URL(request.url).pathname;
@@ -9,7 +10,7 @@ export function middleware(request: NextRequest) {
       return NextResponse.next();
     }
 
-    return NextResponse.redirect('http://localhost:3010/auth/sign-in');
+    return NextResponse.redirect(`${process.env.HOST}${AUTH_ROUTES.SIGN_IN}`);
   }
 }
 
