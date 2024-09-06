@@ -1,6 +1,6 @@
 'use client';
 
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useFormState } from 'react-dom';
 
@@ -18,11 +18,12 @@ const initState: SignInFormState = {
 
 export default function SignInForm() {
   const [formState, formAction] = useFormState(signInAction, initState);
+  const router = useRouter();
 
   function handleSignIn() {
     if (formState.user && formState.jwtToken) {
       saveJwtTokenAsCookie(formState.jwtToken);
-      redirect(MAIN_ROUTES.HOME);
+      router.push(MAIN_ROUTES.HOME);
     }
   }
 

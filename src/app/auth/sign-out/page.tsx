@@ -1,5 +1,5 @@
-import SignOutForm from './SignOutForm';
+import SignOutComponent from './SignOutComponent';
 
 export default function SignOutPage() {
-  return <SignOutForm />;
+  return <SignOutComponent />;
 }

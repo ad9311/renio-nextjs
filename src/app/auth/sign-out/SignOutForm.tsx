@@ -1,7 +1,7 @@
 'use client';
 
 import Cookies from 'js-cookie';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useFormState } from 'react-dom';
 
@@ -11,11 +11,12 @@ import { signOutAction } from '@/server-actions/auth';
 
 export default function SignOutForm() {
   const [formState, formAction] = useFormState(signOutAction, false);
+  const router = useRouter();
 
   function handleSignOut() {
     if (formState) {
       Cookies.remove('renio-auth');
-      redirect(AUTH_ROUTES.SIGN_IN);
+      router.push(AUTH_ROUTES.SIGN_IN);
     }
   }
 
