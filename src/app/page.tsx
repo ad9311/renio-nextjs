@@ -1,3 +1,5 @@
-export default function Home() {
-  return <h1>Renio</h1>;
+import { redirect } from "next/navigation";
+
+export default async function RootPage() {
+  redirect('/home');
 }
