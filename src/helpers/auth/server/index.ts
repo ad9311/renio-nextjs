@@ -1,6 +1,7 @@
 'use server';
 
 import jwt from 'jsonwebtoken';
+import { cookies } from 'next/headers';
 
 import { User } from '@/types/user';
 
@@ -25,4 +26,9 @@ export async function createUserToken(user: User) {
   });
 
   return token;
+}
+
+export async function getSessionToken() {
+  const cookieStore = cookies();
+  return cookieStore.get('renio-session')?.value;
 }

@@ -1,4 +1,4 @@
-import { getJwtToken } from '../auth/client';
+import { getSessionToken } from '@/helpers/auth/client';
 
 export const defaultHeaders: HeadersInit = {
   Accept: 'application/json',
@@ -6,7 +6,7 @@ export const defaultHeaders: HeadersInit = {
 };
 
 export function formatHeaders() {
-  const jwtToken = getJwtToken();
+  const jwtToken = getSessionToken();
   const headers = jwtToken
     ? { ...defaultHeaders, Authorization: `Bearer ${jwtToken}` }
     : defaultHeaders;

@@ -13,7 +13,8 @@ export default function SignOutComponent() {
   async function handleSignOut() {
     const response = await deleteResource(`${process.env.NEXT_PUBLIC_API}/users/sign_out`);
     if (response.ok) {
-      Cookies.remove('renio-auth');
+      Cookies.remove('renio-session');
+      Cookies.remove('user-session');
       router.push(AUTH_ROUTES.SIGN_IN);
     }
   }

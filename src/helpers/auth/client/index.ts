@@ -9,3 +9,7 @@ export function saveSessionToken(sessionToken: string) {
 export function saveUserToken(userToken: string) {
   Cookies.set('user-session', userToken, { expires: 7, path: '/' });
 }
+
+export function getSessionToken() {
+  return Cookies.get('renio-session');
+}
