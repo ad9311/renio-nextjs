@@ -2,11 +2,19 @@
 
 import { useFormStatus } from 'react-dom';
 
-export default function SubmitFormButton() {
+type SubmitFormButtonProps = {
+  pendingChildren?: React.ReactNode;
+} & React.HTMLAttributes<HTMLButtonElement>;
+
+export default function SubmitFormButton({
+  children,
+  pendingChildren,
+  ...props
+}: SubmitFormButtonProps) {
   const { pending } = useFormStatus();
   return (
-    <button type="submit" disabled={pending}>
-      {pending ? 'Submitting...' : 'Submit'}
+    <button {...props} type="submit" disabled={pending}>
+      {pending ? pendingChildren : children}
     </button>
   );
 }

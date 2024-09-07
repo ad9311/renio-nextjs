@@ -2,28 +2,36 @@
 
 import { getJwtToken, retrieveJwtToken } from '@/helpers/auth/server';
 import { defaultHeaders } from '@/helpers/fetch';
+import { formatZodErrors } from '@/helpers/forms';
 import { SignInFormState } from '@/types/auth';
+import { SignInDataValidation } from '@/validations/user';
 
 export async function signInAction(
   initState: SignInFormState,
   formData: FormData
 ): Promise<SignInFormState> {
-  const body = JSON.stringify({
-    user: {
-      email: formData.get('email'),
-      password: formData.get('password'),
-    },
-  });
+  const signInData = {
+    email: formData.get('email'),
+    password: formData.get('password'),
+  };
+
+  const validation = SignInDataValidation.safeParse(signInData);
+  if (validation.error) {
+    return { ...initState, errors: formatZodErrors(validation.error.issues) };
+  }
 
   const response = await fetch(`${process.env.API}/users/sign_in`, {
     method: 'POST',
     headers: defaultHeaders,
-    body,
+    body: JSON.stringify({ user: signInData }),
   });
 
-  const jwtToken = await retrieveJwtToken(response);
+  if (response.ok) {
+    const jwtToken = await retrieveJwtToken(response);
+    if (!jwtToken) {
+      return { ...initState, errors: ['did not receive authentication token'] };
+    }
 
-  if (response.ok && jwtToken) {
     const json = await response.json();
 
     return {
@@ -33,7 +41,7 @@ export async function signInAction(
     };
   }
 
-  return initState;
+  return { ...initState, errors: [response.statusText] };
 }
 
 export async function signOutAction(initState: boolean): Promise<boolean> {

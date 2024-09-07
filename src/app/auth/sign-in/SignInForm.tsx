@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useFormState } from 'react-dom';
 
+import FormErrorsList from '@/components/client/FormErrorsList';
 import SubmitFormButton from '@/components/client/SubmitFormButton';
 import { saveJwtTokenAsCookie } from '@/helpers/auth/client';
 import { MAIN_ROUTES } from '@/routes';
@@ -32,18 +33,21 @@ export default function SignInForm() {
   }, [formState]);
 
   return (
-    <form action={formAction}>
-      <fieldset>
-        <label htmlFor="email">Email</label>
-        <input type="email" name="email" id="email" autoComplete="email" />
-      </fieldset>
-      <fieldset>
-        <label htmlFor="password">Password</label>
-        <input type="password" name="password" id="password" autoComplete="current-password" />
-      </fieldset>
-      <fieldset>
-        <SubmitFormButton />
-      </fieldset>
-    </form>
+    <>
+      <FormErrorsList errors={formState.errors} />
+      <form action={formAction}>
+        <fieldset>
+          <label htmlFor="email">Email</label>
+          <input type="email" name="email" id="email" autoComplete="email" />
+        </fieldset>
+        <fieldset>
+          <label htmlFor="password">Password</label>
+          <input type="password" name="password" id="password" autoComplete="current-password" />
+        </fieldset>
+        <fieldset>
+          <SubmitFormButton pendingChildren="Signing In...">Sign In</SubmitFormButton>
+        </fieldset>
+      </form>
+    </>
   );
 }
