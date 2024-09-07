@@ -3,6 +3,7 @@
 import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
 
+import { AppSession, TokenPayload } from '@/types/session';
 import { User } from '@/types/user';
 
 export async function retrieveSessionToken(response: Response) {
@@ -17,13 +18,13 @@ export async function createUserToken(user: User) {
     sub: user.id,
     email: user.email,
     username: user.username,
+    name: user.name,
     image: user.image,
     iat: Math.floor(Date.now() / 1000),
   };
 
-  const token = jwt.sign(payload, process.env.SESSION_KEY as string, {
-    expiresIn: '7d',
-  });
+  const key = process.env.SESSION_KEY as string;
+  const token = jwt.sign(payload, key, { expiresIn: '7d' });
 
   return token;
 }
@@ -31,4 +32,35 @@ export async function createUserToken(user: User) {
 export async function getSessionToken() {
   const cookieStore = cookies();
   return cookieStore.get('renio-session')?.value;
+}
+
+export async function getUserToken() {
+  const cookieStore = cookies();
+  return cookieStore.get('user-session')?.value;
+}
+
+export async function getSession(token: string): Promise<{
+  session: AppSession;
+  error: Error | null;
+}> {
+  try {
+    const key = process.env.SESSION_KEY as string;
+    const decoded = jwt.verify(token, key);
+    const payload = JSON.parse(JSON.stringify(decoded)) as TokenPayload;
+
+    return {
+      session: {
+        user: {
+          id: payload.sub,
+          username: payload.username,
+          name: payload.name,
+          email: payload.email,
+          image: payload.image,
+        },
+      },
+      error: null,
+    };
+  } catch (error) {
+    return { session: { user: null }, error: error as Error };
+  }
 }
