@@ -9,6 +9,7 @@ import SubmitFormButton from '@/components/client/SubmitFormButton';
 import { saveJwtTokenAsCookie } from '@/helpers/auth/client';
 import { MAIN_ROUTES } from '@/routes';
 import { signInAction } from '@/server-actions/auth';
+import useSessionStore from '@/stores/session';
 import { SignInFormState } from '@/types/auth';
 
 const initState: SignInFormState = {
@@ -19,11 +20,13 @@ const initState: SignInFormState = {
 
 export default function SignInForm() {
   const [formState, formAction] = useFormState(signInAction, initState);
+  const { setSession } = useSessionStore(state => ({ setSession: state.setSession }));
   const router = useRouter();
 
   function handleSignIn() {
     if (formState.user && formState.jwtToken) {
       saveJwtTokenAsCookie(formState.jwtToken);
+      setSession(formState.user);
       router.push(MAIN_ROUTES.HOME);
     }
   }
