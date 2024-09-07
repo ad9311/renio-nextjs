@@ -1,8 +1,12 @@
 'use server';
 
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
+
 import { createUserToken, retrieveSessionToken } from '@/helpers/auth/server';
 import { defaultHeaders } from '@/helpers/fetch';
 import { formatZodErrors } from '@/helpers/forms';
+import { MAIN_ROUTES } from '@/routes';
 import { SignInFormState } from '@/types/auth';
 import { SignInDataValidation } from '@/validations/user';
 
@@ -34,13 +38,23 @@ export async function signInAction(
 
     const json = await response.json();
     const userToken = await createUserToken(json.data.user);
+    const cookiesStore = cookies();
+    const expirationDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
-    return {
-      sessionToken: token,
-      userToken,
-      user: json.data.user,
-      errors: json.errors,
-    };
+    cookiesStore.set({
+      name: 'renio-session',
+      value: token,
+      path: '/',
+      expires: expirationDate,
+    });
+    cookiesStore.set({
+      name: 'user-session',
+      value: userToken,
+      path: '/',
+      expires: expirationDate,
+    });
+
+    redirect(MAIN_ROUTES.HOME);
   }
 
   return { ...initState, errors: [response.statusText] };
