@@ -1,3 +1,5 @@
+'use client';
+
 import { FormErrors } from '@/types/error';
 
 export default function FormErrorsList({ errors }: { errors: FormErrors }) {
