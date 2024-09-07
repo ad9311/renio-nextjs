@@ -1,15 +1,28 @@
 'use server';
 
-import { cookies } from 'next/headers';
+import jwt from 'jsonwebtoken';
 
-export async function retrieveJwtToken(response: Response) {
+import { User } from '@/types/user';
+
+export async function retrieveSessionToken(response: Response) {
   const authHeader = response.headers.get('authorization');
-  const jwtToken = authHeader?.split(' ')[1];
+  const sessionToken = authHeader?.split(' ')[1];
 
-  return jwtToken;
+  return sessionToken;
 }
 
-export async function getJwtToken() {
-  const cookieStore = cookies();
-  return cookieStore.get('renio-auth')?.value;
+export async function createUserToken(user: User) {
+  const payload = {
+    sub: user.id,
+    email: user.email,
+    username: user.username,
+    image: user.image,
+    iat: Math.floor(Date.now() / 1000),
+  };
+
+  const token = jwt.sign(payload, process.env.SESSION_KEY as string, {
+    expiresIn: '7d',
+  });
+
+  return token;
 }

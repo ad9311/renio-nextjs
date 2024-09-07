@@ -4,7 +4,7 @@ import { AUTH_ROUTES } from './routes';
 
 export function middleware(request: NextRequest) {
   const pathname = new URL(request.url).pathname;
-  const cookie = request.cookies.get('renio-auth');
+  const cookie = request.cookies.get('renio-session');
 
   if (pathname.startsWith(AUTH_ROUTES.SIGN_IN) && cookie) {
     return NextResponse.redirect(`${process.env.HOST}/`);

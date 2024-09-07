@@ -2,10 +2,10 @@
 
 import Cookies from 'js-cookie';
 
-export function saveJwtTokenAsCookie(jwtToken: string) {
-  Cookies.set('renio-auth', jwtToken, { expires: 7, path: '/' });
+export function saveSessionToken(sessionToken: string) {
+  Cookies.set('renio-session', sessionToken, { expires: 7, path: '/' });
 }
 
-export function getJwtToken() {
-  return Cookies.get('renio-auth');
+export function saveUserToken(userToken: string) {
+  Cookies.set('user-session', userToken, { expires: 7, path: '/' });
 }

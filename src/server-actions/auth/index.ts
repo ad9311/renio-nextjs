@@ -1,6 +1,6 @@
 'use server';
 
-import { getJwtToken, retrieveJwtToken } from '@/helpers/auth/server';
+import { createUserToken, retrieveSessionToken } from '@/helpers/auth/server';
 import { defaultHeaders } from '@/helpers/fetch';
 import { formatZodErrors } from '@/helpers/forms';
 import { SignInFormState } from '@/types/auth';
@@ -27,15 +27,17 @@ export async function signInAction(
   });
 
   if (response.ok) {
-    const jwtToken = await retrieveJwtToken(response);
-    if (!jwtToken) {
-      return { ...initState, errors: ['did not receive authentication token'] };
+    const token = await retrieveSessionToken(response);
+    if (!token) {
+      return { ...initState, errors: ['No session token'] };
     }
 
     const json = await response.json();
+    const userToken = await createUserToken(json.data.user);
 
     return {
-      jwtToken,
+      sessionToken: token,
+      userToken,
       user: json.data.user,
       errors: json.errors,
     };
