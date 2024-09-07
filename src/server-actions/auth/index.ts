@@ -43,21 +43,3 @@ export async function signInAction(
 
   return { ...initState, errors: [response.statusText] };
 }
-
-export async function signOutAction(initState: boolean): Promise<boolean> {
-  const jwtToken = await getJwtToken();
-  const headers = jwtToken
-    ? { ...defaultHeaders, Authorization: `Bearer ${jwtToken}` }
-    : defaultHeaders;
-
-  const response = await fetch(`${process.env.API}/users/sign_out`, {
-    method: 'DELETE',
-    headers,
-  });
-
-  if (response.ok) {
-    return true;
-  }
-
-  return initState;
-}
