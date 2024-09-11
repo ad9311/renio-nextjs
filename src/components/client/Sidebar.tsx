@@ -1,12 +1,11 @@
-'use client';
+import { getSession } from '@/helpers/auth/server';
 
-import useSessionStore from '@/stores/session';
+export default async function Sidebar() {
+  const { session, error } = await getSession();
 
-export default function Sidebar() {
-  const { session } = useSessionStore(state => ({ session: state.session }));
-  if (!session.user) {
-    return null;
+  if (error) {
+    return <p>And error has ocurred!</p>;
   }
 
-  return <div>{session.user.name}</div>;
+  return <div>{session.user?.name}</div>;
 }

@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
+
 import './globals.css';
+import Sidebar from '@/components/client/Sidebar';
 
 export const metadata: Metadata = {
   title: 'Renio',
@@ -13,7 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Sidebar />
+        <main>{children}</main>
+      </body>
     </html>
   );
 }

@@ -39,13 +39,14 @@ export async function getUserToken() {
   return cookieStore.get('user-session')?.value;
 }
 
-export async function getSession(token: string): Promise<{
+export async function getSession(): Promise<{
   session: AppSession;
   error: Error | null;
 }> {
+  const token = await getUserToken();
   try {
     const key = process.env.SESSION_KEY as string;
-    const decoded = jwt.verify(token, key);
+    const decoded = jwt.verify(token as string, key);
     const payload = JSON.parse(JSON.stringify(decoded)) as TokenPayload;
 
     return {
