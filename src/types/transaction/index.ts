@@ -2,7 +2,7 @@ export type TransactionType = {
   id: number;
   name: string;
   color: string;
-}
+};
 
 export type Transaction = {
   id: number;

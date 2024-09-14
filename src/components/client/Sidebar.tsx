@@ -1,6 +1,7 @@
+import Link from 'next/link';
+
 import { getSession } from '@/helpers/auth/server';
 import { AUTH_ROUTES } from '@/routes';
-import Link from 'next/link';
 
 export default async function Sidebar() {
   const { session, error } = await getSession();

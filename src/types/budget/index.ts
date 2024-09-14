@@ -1,4 +1,4 @@
-import { Expense, Income } from "../transaction";
+import { Expense, Income } from '../transaction';
 
 export type Budget = {
   id: number;
