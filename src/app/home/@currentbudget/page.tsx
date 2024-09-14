@@ -1,4 +1,5 @@
 import { getResource } from '@/helpers/fetch';
+
 import BudgetInfo from './BudgetInfo';
 
 export default async function CurrentBudgetPage() {
