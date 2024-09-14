@@ -1,4 +1,7 @@
-import { getResource } from '@/helpers/fetch';
+import { redirect } from 'next/navigation';
+
+import { getResource, postResource } from '@/helpers/fetch';
+import { MAIN_ROUTES } from '@/routes';
 
 import BudgetInfo from './BudgetInfo';
 
@@ -8,7 +11,22 @@ export default async function CurrentBudgetPage() {
   );
   const json = await response.json();
 
-  if (!response.ok || json.status !== 'SUCCESS') {
+  if (!response.ok && json.status === 'ERROR_NOT_FOUND') {
+    const currentDate = new Date();
+    const body = JSON.stringify({
+      budget: {
+        year: currentDate.getFullYear(),
+        month: currentDate.getMonth() + 1,
+      },
+    });
+    const response = await postResource(`${process.env.API}/budgets`, body);
+    const json = await response.json();
+    if (response.ok && json.status === 'SUCCESS_CREATED') {
+      redirect(MAIN_ROUTES.HOME);
+    }
+  }
+
+  if (!response.ok) {
     return null;
   }
 
