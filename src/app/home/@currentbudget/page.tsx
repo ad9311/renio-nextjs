@@ -1,13 +1,15 @@
 import { getResource } from '@/helpers/fetch';
+import BudgetInfo from './BudgetInfo';
 
 export default async function CurrentBudgetPage() {
   const response = await getResource(
     `${process.env.API}/budgets/current?transactions=income:expenses`
   );
-  if (response.ok) {
-    const json = await response.json();
-    return <div>{JSON.stringify(json)}</div>;
+  const json = await response.json();
+
+  if (!response.ok || json.status !== 'SUCCESS') {
+    return null;
   }
 
-  return null;
+  return <BudgetInfo budget={json.data.budget} />;
 }
