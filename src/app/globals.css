@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply h-full;
+  }
+
   body {
-    @apply bg-slate-100;
+    @apply h-full bg-white;
   }
 }

@@ -1,10 +1,13 @@
 import type { Metadata } from 'next';
+import { Rubik } from 'next/font/google';
 
 import './globals.css';
 import SaveUserStore from '@/components/client/SaveUserStore';
 import Sidebar from '@/components/server/Sidebar';
 import { getSession } from '@/helpers/auth/server';
 import Topbar from '@/components/server/Topbar';
+
+const inter = Rubik({ subsets: ['latin', 'latin-ext'] });
 
 export const metadata: Metadata = {
   title: 'Renio',
@@ -22,12 +25,12 @@ export default async function RootLayout({
     return (
       <>
         <SaveUserStore />
-        <div className="grid grid-cols-1 xl:grid-cols-12">
-          <div className="col-span-1 xl:col-span-3 2xl:col-span-2">
+        <div className="h-full grid grid-cols-1 xl:grid-cols-12 xl:gap-11">
+          <div className="h-full col-span-1 xl:col-span-3 2xl:col-span-2">
             <div className="xl:hidden">
               <Topbar />
             </div>
-            <div className="hidden xl:block">
+            <div className="h-full hidden xl:block">
               <Sidebar />
             </div>
           </div>
@@ -43,7 +46,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body>{session ? <SessionView /> : <AuthView />}</body>
+      <body className={inter.className}>{session ? <SessionView /> : <AuthView />}</body>
     </html>
   );
 }
