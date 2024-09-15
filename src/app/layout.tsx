@@ -4,8 +4,8 @@ import { Rubik } from 'next/font/google';
 import './globals.css';
 import SaveUserStore from '@/components/client/SaveUserStore';
 import Sidebar from '@/components/server/Sidebar';
-import { getSession } from '@/helpers/auth/server';
 import Topbar from '@/components/server/Topbar';
+import { getSession } from '@/helpers/auth/server';
 
 const inter = Rubik({ subsets: ['latin', 'latin-ext'] });
 
