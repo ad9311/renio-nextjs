@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 import { deleteResource } from '@/helpers/fetch';
-import { AUTH_ROUTES } from '@/routes';
 
 export default function SignOutComponent() {
   const router = useRouter();
@@ -15,7 +14,7 @@ export default function SignOutComponent() {
     if (response.ok) {
       Cookies.remove('renio-session');
       Cookies.remove('user-session');
-      router.push(AUTH_ROUTES.SIGN_IN);
+      router.refresh();
     }
   }
 
