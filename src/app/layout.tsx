@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 
 import './globals.css';
 import Sidebar from '@/components/client/Sidebar';
-import { getSession } from '@/helpers/auth/server';
 
 export const metadata: Metadata = {
   title: 'Renio',
@@ -14,12 +13,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { session } = await getSession();
-
   return (
     <html lang="en">
       <body>
-        {session.user && <Sidebar />}
+        <Sidebar />
         <main>{children}</main>
       </body>
     </html>

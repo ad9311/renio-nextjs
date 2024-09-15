@@ -5,13 +5,12 @@ import { AUTH_ROUTES } from './routes';
 export function middleware(request: NextRequest) {
   const pathname = new URL(request.url).pathname;
   const sessionToken = request.cookies.get('renio-session');
-  const userSession = request.cookies.get('user-session');
 
-  if (pathname.startsWith(AUTH_ROUTES.SIGN_IN) && sessionToken && userSession) {
+  if (pathname.startsWith(AUTH_ROUTES.SIGN_IN) && sessionToken) {
     return NextResponse.redirect(`${process.env.HOST}/`);
   }
 
-  if (!pathname.startsWith(AUTH_ROUTES.SIGN_IN) && !(sessionToken && userSession)) {
+  if (!pathname.startsWith(AUTH_ROUTES.SIGN_IN) && !sessionToken) {
     return NextResponse.redirect(`${process.env.HOST}${AUTH_ROUTES.SIGN_IN}`);
   }
 
