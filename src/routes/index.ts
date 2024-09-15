@@ -4,4 +4,5 @@ export const AUTH_ROUTES = {
 } as const;
 export const MAIN_ROUTES = {
   HOME: '/home',
+  BUDGETS: '/budgets',
 } as const;
