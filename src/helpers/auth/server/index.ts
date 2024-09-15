@@ -1,6 +1,6 @@
 'use server';
 
-import jwt from 'jsonwebtoken';
+import { jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 
 export async function retrieveSessionToken(response: Response) {
@@ -15,14 +15,11 @@ export async function getSessionToken() {
   return cookieStore.get('renio-session')?.value;
 }
 
-export async function getSession() {
-  const token = await getSessionToken();
+export async function decodeToken(token: string) {
   try {
-    const decoded = jwt.verify(token as string, process.env.SESSION_KEY as string);
-    const stringified = JSON.stringify(decoded);
-    const decodedToken = JSON.parse(stringified);
+    const verified = await jwtVerify(token, new TextEncoder().encode(process.env.SESSION_KEY));
     const currentDate = new Date();
-    const expiration = new Date(decodedToken.exp * 1000);
+    const expiration = new Date(Number(verified.payload.exp) * 1000);
 
     if (expiration < currentDate) {
       return { session: null, error: new Error('session token has expired') };
@@ -31,4 +28,9 @@ export async function getSession() {
   } catch (error) {
     return { session: null, error: error as Error };
   }
+}
+
+export async function getSession() {
+  const token = await getSessionToken();
+  return await decodeToken(token as string);
 }
