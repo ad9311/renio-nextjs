@@ -18,16 +18,28 @@ export default function SignInForm() {
   return (
     <>
       <FormErrorsList errors={formState.errors} />
-      <form action={formAction}>
+      <form action={formAction} className="form">
         <fieldset>
-          <label htmlFor="email">Email</label>
-          <input type="email" name="email" id="email" autoComplete="email" />
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            autoComplete="email"
+            placeholder="Type your email"
+          />
         </fieldset>
         <fieldset>
-          <label htmlFor="password">Password</label>
-          <input type="password" name="password" id="password" autoComplete="current-password" />
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            autoComplete="current-password"
+            placeholder="Type your password"
+          />
         </fieldset>
-        <fieldset>
+        <fieldset className="actions">
           <SubmitFormButton pendingChildren="Signing In...">Sign In</SubmitFormButton>
         </fieldset>
       </form>

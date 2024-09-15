@@ -25,7 +25,7 @@ export default async function RootLayout({
     return (
       <>
         <SaveUserStore />
-        <div className="h-full grid grid-cols-1 xl:grid-cols-12 xl:gap-11">
+        <div className="xl:h-full grid grid-cols-1 xl:grid-cols-12 xl:gap-11">
           <div className="h-full col-span-1 xl:col-span-3 2xl:col-span-2">
             <div className="xl:hidden">
               <Topbar />
@@ -41,7 +41,7 @@ export default async function RootLayout({
   }
 
   function AuthView() {
-    return <main>{children}</main>;
+    return <main className="px-2">{children}</main>;
   }
 
   return (
