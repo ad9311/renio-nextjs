@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import './globals.css';
+import SaveUserStore from '@/components/client/SaveUserStore';
 import Sidebar from '@/components/client/Sidebar';
 
 export const metadata: Metadata = {
@@ -16,6 +17,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
+        <SaveUserStore />
         <Sidebar />
         <main>{children}</main>
       </body>

@@ -5,3 +5,9 @@ export type User = {
   email: string;
   image: string | null;
 };
+
+export type UserStore = {
+  user: User | null;
+  setUser: (user: User) => void;
+  clearUser: () => void;
+};
