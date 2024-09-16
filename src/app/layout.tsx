@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import { Rubik } from 'next/font/google';
-
 import './globals.css';
+import { NextIntlClientProvider } from 'next-intl';
+import { getLocale, getMessages } from 'next-intl/server';
+
 import SaveUserStore from '@/components/client/SaveUserStore';
 import Sidebar from '@/components/server/Sidebar';
 import Topbar from '@/components/server/Topbar';
@@ -20,6 +22,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const { session } = await getSession();
+  const locale = await getLocale();
+  const messages = await getMessages();
 
   function SessionView() {
     return (
@@ -35,7 +39,7 @@ export default async function RootLayout({
             </div>
           </div>
           <main className="py-4 px-2 xl:px-4 col-span-1 xl:col-span-9 2xl:col-span-10">
-            {children}
+            <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
           </main>
         </div>
       </>
@@ -47,7 +51,7 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body className={inter.className}>{session ? <SessionView /> : <AuthView />}</body>
     </html>
   );

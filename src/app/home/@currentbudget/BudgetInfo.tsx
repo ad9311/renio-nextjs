@@ -16,17 +16,17 @@ export default function BudgetInfo({ budget }: { budget: FullBudget }) {
         <div className="my-4 text-center text-2xl">
           <p className="leading-4">
             <span className="text-base text-gray-400">Balance:</span>
-            <p className="number">{budget.balance.toFixed(2)}</p>
+            <span className="block number">{0}</span>
           </p>
         </div>
         <div className="flex items-center justify-between text-xl text-center">
           <p className="leading-4">
             <span className="text-base text-gray-400">Income:</span>
-            <p className="number">{budget.totalIncome.toFixed(2)}</p>
+            <span className="block number">{budget.totalIncome.toFixed(2)}</span>
           </p>
           <p className="leading-4">
             <span className="text-base text-gray-400">Expenses:</span>
-            <p className="number">{budget.totalExpenses.toFixed(2)}</p>
+            <span className="block number">{budget.totalExpenses.toFixed(2)}</span>
           </p>
         </div>
       </div>
