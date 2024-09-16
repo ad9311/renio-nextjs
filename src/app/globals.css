@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Changa:wght@200..800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,7 +15,7 @@
 
 @layer components {
   .card {
-    @apply p-4 bg-slate-200 rounded;
+    @apply p-4 bg-slate-200 rounded border border-slate-300;
   }
 
   .btn {
@@ -31,6 +32,14 @@
 }
 
 @layer utilities {
+  .title {
+    @apply text-lg font-bold;
+  }
+
+  .number {
+    font-family: "Changa", sans-serif;
+  }
+
   .form fieldset {
     @apply mb-4;
   }

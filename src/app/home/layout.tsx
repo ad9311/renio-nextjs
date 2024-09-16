@@ -8,10 +8,12 @@ export default function HomeLayout({
   lastbudgets: React.ReactNode;
 }) {
   return (
-    <div>
+    <>
       {children}
-      {currentbudget}
-      {lastbudgets}
-    </div>
+      <div className="grid xl:grid-cols-12 gap-4">
+        <div className="card xl:col-span-5">{currentbudget}</div>
+        <div className="card xl:col-span-7">{lastbudgets}</div>
+      </div>
+    </>
   );
 }

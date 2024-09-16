@@ -6,11 +6,11 @@ export type Budget = {
   year: number;
   month: number;
   balance: number;
-  total_income: number;
-  total_expenses: number;
-  transaction_count: number;
-  income_count: number;
-  expense_count: number;
+  totalIncome: number;
+  totalExpenses: number;
+  transactionCount: number;
+  incomeCount: number;
+  expenseCount: number;
 };
 
 export type FullBudget = Budget & {
