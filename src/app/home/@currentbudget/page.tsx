@@ -29,5 +29,5 @@ export default async function CurrentBudgetPage() {
     return null;
   }
 
-  return <BudgetInfo budget={json.data.budget} />;
+  return <BudgetInfo title="Current budget" budget={json.data.budget} />;
 }

@@ -5,15 +5,17 @@ import { MAIN_ROUTES } from '@/routes';
 import { FullBudget } from '@/types/budget';
 
 export default function BudgetInfo({
+  title,
   budget,
   extended,
 }: {
+  title: string;
   budget: FullBudget;
   extended?: boolean;
 }) {
   return (
     <section>
-      <h2 className="title">Current budget</h2>
+      <h2 className="title">{title}</h2>
       <h3 className="mt-6 text-center text-2xl xl:text-3xl text-primary-700 font-bold number">
         <Link href={`${MAIN_ROUTES.BUDGETS}/${budget.uid}`} className="hover:underline">
           {budget.month}-{budget.year}
