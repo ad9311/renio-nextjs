@@ -9,13 +9,13 @@
   }
 
   body {
-    @apply h-full bg-slate-50 text-slate-800;
+    @apply h-full bg-white text-slate-800;
   }
 }
 
 @layer components {
   .card {
-    @apply p-4 bg-slate-200 rounded border border-slate-300;
+    @apply p-4 bg-slate-100 rounded border border-slate-300;
   }
 
   .btn {

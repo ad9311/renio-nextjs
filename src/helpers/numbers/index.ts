@@ -1,6 +1,6 @@
 export function setBalanceColorClass(value: number) {
   if (value === 0) {
-    return 'text-gray-500';
+    return 'text-gray-600';
   }
 
   if (value > 0) {
@@ -15,7 +15,7 @@ export function setIncomeColorClass(value: number) {
     return 'text-emerald-600';
   }
 
-  return 'text-gray-500';
+  return 'text-gray-600';
 }
 
 export function setExpenseColorClass(value: number) {
@@ -23,5 +23,5 @@ export function setExpenseColorClass(value: number) {
     return 'text-rose-600';
   }
 
-  return 'text-gray-500';
+  return 'text-gray-600';
 }

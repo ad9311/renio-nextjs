@@ -1,9 +1,8 @@
 import { redirect } from 'next/navigation';
 
+import BudgetInfo from '@/components/client/BudgetInfo';
 import { getResource, postResource } from '@/helpers/fetch';
 import { MAIN_ROUTES } from '@/routes';
-
-import BudgetInfo from './BudgetInfo';
 
 export default async function CurrentBudgetPage() {
   const response = await getResource(
