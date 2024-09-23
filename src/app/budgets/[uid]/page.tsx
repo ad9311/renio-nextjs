@@ -1,7 +1,7 @@
 import BudgetInfo from '@/components/client/BudgetInfo';
 import { getResource } from '@/helpers/fetch';
 
-import IncomeList from './IncomeList';
+import IncomeList from './income/IncomeList';
 import SaveBudgetStore from './SaveBudgetStore';
 
 export default async function BudgetPage({ params }: { params: { uid: string } }) {

@@ -1,3 +1,5 @@
+import { FormErrors } from '../error';
+
 export type TransactionType = {
   id: number;
   name: string;
@@ -15,3 +17,8 @@ export type Transaction = {
 export type Income = Transaction;
 
 export type Expense = Transaction;
+
+export type IncomeFormState = {
+  income: Income | null;
+  errors: FormErrors;
+};

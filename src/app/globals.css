@@ -48,8 +48,10 @@
     @apply block text-sm italic text-gray-400;
   }
 
+  .form textarea,
   .form input[type="password"],
   .form input[type="email"],
+  .form input[type="number"],
   .form input[type="text"] {
     @apply
       py-2
@@ -58,7 +60,13 @@
       rounded
       bg-white
       text-slate-800
+      border
+      border-slate-300
       outline-slate-500;
+  }
+
+  .form textarea {
+    @apply resize-none;
   }
 
   .form .actions {
