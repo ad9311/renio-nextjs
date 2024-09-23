@@ -9,6 +9,7 @@ export type Transaction = {
   description: string;
   amount: number;
   transactionType: TransactionType;
+  budgetUid: string;
 };
 
 export type Income = Transaction;

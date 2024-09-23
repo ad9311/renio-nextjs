@@ -4,6 +4,7 @@ import './globals.css';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 
+import ModalContainer from '@/components/client/ModalContainer';
 import SaveUserStore from '@/components/client/SaveUserStore';
 import Sidebar from '@/components/server/Sidebar';
 import Topbar from '@/components/server/Topbar';
@@ -42,6 +43,7 @@ export default async function RootLayout({
             <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
           </main>
         </div>
+        <ModalContainer />
       </>
     );
   }

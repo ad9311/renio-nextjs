@@ -17,3 +17,9 @@ export type FullBudget = Budget & {
   incomeList: Income[];
   expenses: Expense[];
 };
+
+export type BudgetStore = {
+  budget: FullBudget | null;
+  setBudget: (budget: FullBudget) => void;
+  clearBudget: () => void;
+};
