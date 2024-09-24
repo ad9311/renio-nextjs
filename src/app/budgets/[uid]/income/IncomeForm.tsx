@@ -40,10 +40,10 @@ export default function IncomeForm({ budget, formAction, ...props }: IncomeFormP
 
   return (
     <form action={formAction} {...props} className="form">
-      <input type="hidden" name="budgetUid" value={budget.uid} />
+      <input type="hidden" name="budget_uid" value={budget.uid} />
       <fieldset>
-        <label htmlFor="transaction_type">Category</label>
-        <select name="transaction_type" id="transaction_type">
+        <label htmlFor="transaction_type_id">Category</label>
+        <select name="transaction_type_id" id="transaction_type_id">
           {mappedTransactionTypes}
         </select>
       </fieldset>

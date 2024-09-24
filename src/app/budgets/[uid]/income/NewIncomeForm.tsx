@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useFormState } from 'react-dom';
 
 import FormErrorsList from '@/components/client/FormErrorsList';
@@ -15,6 +16,10 @@ const initState: IncomeFormState = {
 export default function NewIncomeForm() {
   const { budget } = useBudgetStore(state => ({ budget: state.budget }));
   const [formState, formAction] = useFormState(createIncomeAction, initState);
+
+  useEffect(() => {
+    console.log(formState);
+  }, [formState]);
 
   if (!budget) {
     return null;
