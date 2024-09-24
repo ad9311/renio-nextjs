@@ -2,6 +2,7 @@ import { FormErrors } from '../error';
 
 export type TransactionType = {
   id: number;
+  uid: string;
   name: string;
   color: string;
 };
@@ -21,4 +22,10 @@ export type Expense = Transaction;
 export type IncomeFormState = {
   income: Income | null;
   errors: FormErrors;
+};
+
+export type TransactionStore = {
+  transactionTypes: TransactionType[];
+  setTransactionTypes: (transactionTypes: TransactionType[]) => void;
+  clearStore: () => void;
 };

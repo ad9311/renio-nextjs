@@ -49,6 +49,7 @@
   }
 
   .form textarea,
+  .form select,
   .form input[type="password"],
   .form input[type="email"],
   .form input[type="number"],
