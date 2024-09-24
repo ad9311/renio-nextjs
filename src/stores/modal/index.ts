@@ -9,5 +9,5 @@ const initState = {
 export const useModalStore = create<ModalStore>(set => ({
   ...initState,
   setModal: children => set({ children }),
-  clearModal: () => set({ ...initState }),
+  clearStore: () => set({ ...initState }),
 }));

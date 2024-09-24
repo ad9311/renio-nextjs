@@ -1,7 +1,10 @@
+'use client';
+
 import { useEffect } from 'react';
 import { useFormState } from 'react-dom';
 
 import FormErrorsList from '@/components/client/FormErrorsList';
+import { resetForm } from '@/helpers/forms';
 import { createIncomeAction } from '@/server-actions/transaction/income';
 import { useBudgetStore } from '@/stores/budget';
 import { IncomeFormState } from '@/types/transaction';
@@ -18,7 +21,9 @@ export default function NewIncomeForm() {
   const [formState, formAction] = useFormState(createIncomeAction, initState);
 
   useEffect(() => {
-    console.log(formState);
+    if (formState.income) {
+      resetForm('income_form');
+    }
   }, [formState]);
 
   if (!budget) {
@@ -28,7 +33,7 @@ export default function NewIncomeForm() {
   return (
     <>
       <FormErrorsList errors={formState.errors} />
-      <IncomeForm budget={budget} formAction={formAction} />
+      <IncomeForm id="income_form" budget={budget} formAction={formAction} />
     </>
   );
 }
