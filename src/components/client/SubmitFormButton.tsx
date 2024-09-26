@@ -15,14 +15,14 @@ export default function SubmitFormButton({
 
   if (pending) {
     return (
-      <button {...props} className="btn btn-neutral" type="submit" disabled>
+      <button className="btn btn-neutral" {...props} type="submit" disabled>
         {pendingChildren}
       </button>
     );
   }
 
   return (
-    <button {...props} className="btn btn-primary" type="submit">
+    <button className="btn btn-primary" {...props} type="submit">
       {children}
     </button>
   );

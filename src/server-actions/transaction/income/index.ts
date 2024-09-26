@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 
-import { postResource } from '@/helpers/fetch';
+import { patchResource, postResource } from '@/helpers/fetch';
 import { deleteResource } from '@/helpers/fetch';
 import { formatZodErrors } from '@/helpers/forms';
 import { toSnakeCaseObject } from '@/helpers/strings';
@@ -31,6 +31,35 @@ export async function createIncomeAction(
   );
   const json = await response.json();
   if (response.ok && json.status === 'SUCCESS_CREATED') {
+    revalidatePath(`${MAIN_ROUTES.BUDGETS}/${budgetUid}`);
+    return { income: json.data.income, errors: null };
+  }
+
+  return { ...initState, errors: json.errors };
+}
+
+export async function editIncomeAction(
+  initState: IncomeFormState,
+  formData: FormData
+): Promise<IncomeFormState> {
+  const incomeData = {
+    transactionTypeId: Number(formData.get('transaction_type_id')),
+    description: formData.get('description'),
+    amount: Number(formData.get('amount')),
+  };
+  const validation = incomeDataValidation.safeParse(incomeData);
+  if (validation.error) {
+    return { ...initState, errors: formatZodErrors(validation.error.issues) };
+  }
+
+  const budgetUid = formData.get('budget_uid');
+  const incomeId = formData.get('income_id');
+  const response = await patchResource(
+    `${process.env.API}/budgets/${budgetUid}/incomes/${incomeId}`,
+    JSON.stringify({ income: toSnakeCaseObject(incomeData) })
+  );
+  const json = await response.json();
+  if (response.ok && json.status === 'SUCCESS_UPDATED') {
     revalidatePath(`${MAIN_ROUTES.BUDGETS}/${budgetUid}`);
     return { income: json.data.income, errors: null };
   }
