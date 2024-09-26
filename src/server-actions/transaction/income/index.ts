@@ -3,6 +3,7 @@
 import { revalidatePath } from 'next/cache';
 
 import { postResource } from '@/helpers/fetch';
+import { deleteResource } from '@/helpers/fetch';
 import { formatZodErrors } from '@/helpers/forms';
 import { toSnakeCaseObject } from '@/helpers/strings';
 import { MAIN_ROUTES } from '@/routes';
@@ -35,4 +36,22 @@ export async function createIncomeAction(
   }
 
   return { ...initState, errors: json.errors };
+}
+
+export async function deleteIncomeAction(
+  initState: IncomeFormState,
+  formData: FormData
+): Promise<IncomeFormState> {
+  const budgetUid = formData.get('budget_uid');
+  const incomeId = formData.get('income_id');
+  const response = await deleteResource(
+    `${process.env.API}/budgets/${budgetUid}/incomes/${incomeId}`
+  );
+  if (response.ok) {
+    const json = await response.json();
+    revalidatePath(`${MAIN_ROUTES.BUDGETS}/${budgetUid}`);
+    return { ...initState, income: json.data.income };
+  }
+
+  return initState;
 }

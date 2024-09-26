@@ -4,10 +4,12 @@ import { BudgetStore } from '@/types/budget';
 
 const initState = {
   budget: null,
+  income: null,
 };
 
 export const useBudgetStore = create<BudgetStore>(set => ({
   ...initState,
   setBudget: budget => set({ budget }),
-  clearBudget: () => set({ budget: null }),
+  setIncome: income => set({ income }),
+  clearStore: () => set({ budget: null }),
 }));
