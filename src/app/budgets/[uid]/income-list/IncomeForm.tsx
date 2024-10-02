@@ -59,7 +59,7 @@ export default function IncomeForm({ budget, income, formAction, ...props }: Inc
       </fieldset>
       <fieldset>
         <label htmlFor="amount">Amount</label>
-        <input type="number" name="amount" id="amount" defaultValue={income?.amount} />
+        <input type="number" name="amount" id="amount" defaultValue={income?.amount} step={0.01} min={1} />
       </fieldset>
       <fieldset className="actions">
         <SubmitFormButton pendingChildren="Submitting...">Submit</SubmitFormButton>
