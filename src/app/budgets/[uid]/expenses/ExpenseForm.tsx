@@ -35,7 +35,7 @@ export default function ExpenseForm({ budget, expense, formAction, ...props }: E
   ));
 
   useEffect(() => {
-    console.log({budget});
+    console.log({ budget });
     if (!transactionTypes.length) {
       getTransactionTypes();
     }
@@ -60,7 +60,14 @@ export default function ExpenseForm({ budget, expense, formAction, ...props }: E
       </fieldset>
       <fieldset>
         <label htmlFor="amount">Amount</label>
-        <input type="number" name="amount" id="amount" defaultValue={expense?.amount} step={0.01} min={1} />
+        <input
+          type="number"
+          name="amount"
+          id="amount"
+          defaultValue={expense?.amount}
+          step={0.01}
+          min={1}
+        />
       </fieldset>
       <fieldset className="actions">
         <SubmitFormButton pendingChildren="Submitting...">Submit</SubmitFormButton>

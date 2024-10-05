@@ -1,9 +1,9 @@
 import BudgetInfo from '@/components/client/BudgetInfo';
 import { getResource } from '@/helpers/fetch';
 
+import Expenses from './expenses/Expenses';
 import IncomeList from './income-list/IncomeList';
 import SaveBudgetStore from './SaveBudgetStore';
-import Expenses from './expenses/Expenses';
 
 export default async function BudgetPage({ params }: { params: { uid: string } }) {
   const response = await getResource(

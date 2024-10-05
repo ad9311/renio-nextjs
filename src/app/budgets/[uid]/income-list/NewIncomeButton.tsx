@@ -5,8 +5,9 @@ import React from 'react';
 
 import { useModalStore } from '@/stores/modal';
 
-import NewIncomeForm from './NewIncomeForm';
 import TransactionModalForm from '../TransactionModalForm';
+
+import NewIncomeForm from './NewIncomeForm';
 
 export default function NewIncomeButton() {
   const { setModal } = useModalStore(state => ({ setModal: state.setModal }));

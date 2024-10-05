@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Amount from '@/components/client/Amount';
 import { MAIN_ROUTES } from '@/routes';
 import { Expense } from '@/types/transaction';
+
 import NewExpenseButton from './NewExpenseButton';
 
 export default function Expenses({ expenses }: { expenses: Expense[] }) {

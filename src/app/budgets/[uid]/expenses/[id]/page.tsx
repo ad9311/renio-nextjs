@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { getResource } from '@/helpers/fetch';
 import { useBudgetStore } from '@/stores/budget';
 import { FullBudget } from '@/types/budget';
+
 import ExpenseDetails from './ExpenseDetails';
 
 // import IncomeDetails from './IncomeDetails';

@@ -6,7 +6,7 @@ import Modal from '@/components/client/Modal';
 type TransactionModalFormProps = {
   title: string;
   children?: React.ReactNode;
-}
+};
 
 export default function TransactionModalForm({ children, title }: TransactionModalFormProps) {
   return (

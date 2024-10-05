@@ -1,12 +1,13 @@
 'use server';
 
-import { postResource } from "@/helpers/fetch";
-import { formatZodErrors } from "@/helpers/forms";
-import { toSnakeCaseObject } from "@/helpers/strings";
-import { MAIN_ROUTES } from "@/routes";
-import { ExpenseFormState } from "@/types/transaction";
-import { transactionDataValidation } from "@/validations/transaction";
-import { revalidatePath } from "next/cache";
+import { revalidatePath } from 'next/cache';
+
+import { postResource } from '@/helpers/fetch';
+import { formatZodErrors } from '@/helpers/forms';
+import { toSnakeCaseObject } from '@/helpers/strings';
+import { MAIN_ROUTES } from '@/routes';
+import { ExpenseFormState } from '@/types/transaction';
+import { transactionDataValidation } from '@/validations/transaction';
 
 export async function createExpenseAction(
   initState: ExpenseFormState,
@@ -23,7 +24,7 @@ export async function createExpenseAction(
   }
 
   const budgetUid = formData.get('budget_uid');
-  console.log({budgetUid});
+  console.log({ budgetUid });
   const response = await postResource(
     `${process.env.API}/budgets/${budgetUid}/expenses`,
     JSON.stringify({ expense: toSnakeCaseObject(expenseData) })
