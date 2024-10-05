@@ -21,7 +21,9 @@ export type FullBudget = Budget & {
 export type BudgetStore = {
   budget: FullBudget | null;
   income: Income | null;
+  expense: Expense | null;
   setBudget: (budget: FullBudget) => void;
   setIncome: (income: Income) => void;
+  setExpense: (expense: Expense) => void;
   clearStore: () => void;
 };

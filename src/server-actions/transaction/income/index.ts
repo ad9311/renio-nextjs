@@ -8,7 +8,7 @@ import { formatZodErrors } from '@/helpers/forms';
 import { toSnakeCaseObject } from '@/helpers/strings';
 import { MAIN_ROUTES } from '@/routes';
 import { IncomeFormState } from '@/types/transaction';
-import { incomeDataValidation } from '@/validations/income';
+import { transactionDataValidation } from '@/validations/transaction';
 
 export async function createIncomeAction(
   initState: IncomeFormState,
@@ -19,7 +19,7 @@ export async function createIncomeAction(
     description: formData.get('description'),
     amount: Number(formData.get('amount')),
   };
-  const validation = incomeDataValidation.safeParse(incomeData);
+  const validation = transactionDataValidation.safeParse(incomeData);
   if (validation.error) {
     return { ...initState, errors: formatZodErrors(validation.error.issues) };
   }
@@ -47,7 +47,7 @@ export async function editIncomeAction(
     description: formData.get('description'),
     amount: Number(formData.get('amount')),
   };
-  const validation = incomeDataValidation.safeParse(incomeData);
+  const validation = transactionDataValidation.safeParse(incomeData);
   if (validation.error) {
     return { ...initState, errors: formatZodErrors(validation.error.issues) };
   }

@@ -3,6 +3,7 @@ import { getResource } from '@/helpers/fetch';
 
 import IncomeList from './income-list/IncomeList';
 import SaveBudgetStore from './SaveBudgetStore';
+import Expenses from './expenses/Expenses';
 
 export default async function BudgetPage({ params }: { params: { uid: string } }) {
   const response = await getResource(
@@ -22,6 +23,11 @@ export default async function BudgetPage({ params }: { params: { uid: string } }
         </div>
         <div className="card">
           <IncomeList incomeList={json.data.budget.incomeList} />
+        </div>
+      </div>
+      <div>
+        <div className="card">
+          <Expenses expenses={json.data.budget.expenses} />
         </div>
       </div>
     </>

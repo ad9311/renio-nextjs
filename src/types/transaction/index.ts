@@ -24,6 +24,11 @@ export type IncomeFormState = {
   errors: FormErrors;
 };
 
+export type ExpenseFormState = {
+  expense: Expense | null;
+  errors: FormErrors;
+};
+
 export type TransactionStore = {
   transactionTypes: TransactionType[];
   setTransactionTypes: (transactionTypes: TransactionType[]) => void;

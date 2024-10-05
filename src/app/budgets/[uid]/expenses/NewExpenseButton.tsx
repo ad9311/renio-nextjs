@@ -5,23 +5,23 @@ import React from 'react';
 
 import { useModalStore } from '@/stores/modal';
 
-import NewIncomeForm from './NewIncomeForm';
 import TransactionModalForm from '../TransactionModalForm';
+import NewExpenseForm from './NewExpenseForm';
 
-export default function NewIncomeButton() {
+export default function NewExpenseButton() {
   const { setModal } = useModalStore(state => ({ setModal: state.setModal }));
 
   function handleClick() {
     setModal(
-      <TransactionModalForm title="New income">
-        <NewIncomeForm />
+      <TransactionModalForm title="New expense">
+        <NewExpenseForm />
       </TransactionModalForm>
     );
   }
 
   return (
     <button type="button" onClick={handleClick}>
-      <Image src="/img/plus.svg" alt="new-income" width={1} height={1} className="w-6" />
+      <Image src="/img/plus.svg" alt="new-expense" width={1} height={1} className="w-6" />
     </button>
   );
 }
